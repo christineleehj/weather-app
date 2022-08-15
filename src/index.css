@@ -67,6 +67,7 @@ h4 {
   padding: 25px;
   font-family: 'Montserrat', sans-serif;
   font-size: 1.7rem;
+  color: #000000;
 }
 .cities-wrapper .city.active {
   color: #60b0e8;
