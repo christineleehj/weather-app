@@ -1,0 +1,28 @@
+.cities-wrapper {
+    .flex-center;
+
+    .city {
+        border: none;
+        background: none;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.7rem;
+
+        &.active {
+            color: @color-primary;
+            font-weight: 800;
+        }
+
+        @media @mobile {
+            padding: 25px 15px;
+            font-size: 1.3rem;
+        }
+
+        @media @mobileXS{
+            font-size: 1.1rem;
+            padding: 15px 8px;
+        }
+    }
+}

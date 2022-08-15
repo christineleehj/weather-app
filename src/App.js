@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+
+import CityList from './components/CityList';
+import CurrentWeather from './components/CurrentWeather';
+import ForecastWeather from './components/ForecastWeather';
+import getFormattedWeatherData from './data/WeatherData';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [query, setQuery] = useState({ q: "ottawa" });
+  const [units, setUnits] = useState("metric");
+  const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    const fetchWeatherData = async() => {
+      await getFormattedWeatherData({...query, units}).then(
+        (data) => {
+          setWeather(data);
+        });
+    }
+    fetchWeatherData();
+  }, [query, units]);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CityList setQuery={setQuery} />
+
+      {weather && (
+        <div className="container">
+          <CurrentWeather weather={weather} />
+          <ForecastWeather items={weather.daily} />
+        </div>
+      )}
+     
     </div>
   );
 }
