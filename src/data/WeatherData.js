@@ -46,7 +46,7 @@ const getFormattedWeatherData = async searchParams => {
   const formattedForecastWeather = await getWeatherData("onecall", {
     lat,
     lon,
-    exclude: "current, minutely, alerts",
+    exclude: "current, minutely, hourly, alerts",
     units: searchParams.units
   }).then(formatForecastWeather);
 
@@ -56,7 +56,7 @@ const getFormattedWeatherData = async searchParams => {
 const formatToLocalTime = (
   secs,
   zone,
-  format = "cccc, dd LLL yyyy | Local time: 'hh:mm a"
+  format
 ) =>
   DateTime.fromSeconds(secs)
           .setZone(zone)
@@ -64,11 +64,7 @@ const formatToLocalTime = (
 
 const iconCode = code => `${code}`;
 
-export default getFormattedWeatherData;
-
-export { formatToLocalTime, iconCode };
-
-export const WeatherIcons = {
+const WeatherIcons = {
   "01d": "/icons/clear-sky.svg",
   "01n": "/icons/clear-sky-night.svg",
   "02d": "/icons/few-clouds.svg",
@@ -88,3 +84,7 @@ export const WeatherIcons = {
   "50d": "/icons/mist.svg",
   "50n": "/icons/mist.svg"
 };
+
+export default getFormattedWeatherData;
+
+export { formatToLocalTime, iconCode, WeatherIcons };
